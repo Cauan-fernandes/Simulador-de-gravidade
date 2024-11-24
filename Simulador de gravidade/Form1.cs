@@ -84,35 +84,36 @@ namespace Simulador_de_gravidade
                 BotaoParar.Enabled = true;
                 BotaoIniciar.Enabled = false;
 
-                int maxIteracoes = (int)InputTempoIteracoes.Value; 
+                int maxIteracoes = (int)InputTempoIteracoes.Value;
                 int iteracoesRealizadas = 0;
 
-               
+
                 while (Universo.GetCorpos().Count > 1 && Simulando)
                 {
                     foreach (var corpo in Universo.GetCorpos())
                     {
-                        Universo.IteracaoGravitacional(corpo); 
+                        Universo.IteracaoGravitacional(corpo);
                     }
 
-                    Universo.VerificaColisao(); 
+                    Universo.VerificaColisao();
                     iteracoesRealizadas++;
 
-                   
+
                     if (iteracoesRealizadas >= maxIteracoes)
                     {
-                        Espaco.Invalidate(); 
-                        LabelNumIteracoes.Text = $"Qtd Iterações: {Universo.GetQntIteracoes()}"; 
-                        iteracoesRealizadas = 0; 
+                        Espaco.Invalidate();
+                        LabelNumIteracoes.Text = $"Qtd Iterações: {Universo.GetQntIteracoes()}";
+                        iteracoesRealizadas = 0;
 
-                    await Task.Delay(10);
-                }
+                        await Task.Delay(10);
+                    }
 
-            
-                if (!Simulando)
-                {
-                    BotaoParar.Enabled = false;
-                    BotaoIniciar.Enabled = true;
+
+                    if (!Simulando)
+                    {
+                        BotaoParar.Enabled = false;
+                        BotaoIniciar.Enabled = true;
+                    }
                 }
             }
             catch (Exception ex)
