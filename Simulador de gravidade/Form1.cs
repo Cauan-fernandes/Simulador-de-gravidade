@@ -76,7 +76,6 @@ namespace Simulador_de_gravidade
             }
         }
 
-
         private async void BotaoIniciar_Click(object sender, EventArgs e)
         {
             try
@@ -84,18 +83,36 @@ namespace Simulador_de_gravidade
                 Simulando = true;
                 BotaoParar.Enabled = true;
                 BotaoIniciar.Enabled = false;
+
+                int maxIteracoes = (int)InputTempoIteracoes.Value; 
+                int iteracoesRealizadas = 0;
+
+               
                 while (Universo.GetCorpos().Count > 1 && Simulando)
                 {
                     foreach (var corpo in Universo.GetCorpos())
                     {
-                        Universo.IteracaoGravitacional(corpo);
+                        Universo.IteracaoGravitacional(corpo); 
                     }
 
-                    Universo.VerificaColisao();
-                    Espaco.Invalidate();
-                    LabelNumIteracoes.Text = $"Qtd Iterações: {Universo.GetQntIteracoes().ToString()}";
+                    Universo.VerificaColisao(); 
+                    iteracoesRealizadas++;
 
-                    await Task.Delay(50);
+                   
+                    if (iteracoesRealizadas >= maxIteracoes)
+                    {
+                        Espaco.Invalidate(); 
+                        LabelNumIteracoes.Text = $"Qtd Iterações: {Universo.GetQntIteracoes()}"; 
+                        iteracoesRealizadas = 0; 
+
+                    await Task.Delay(10);
+                }
+
+            
+                if (!Simulando)
+                {
+                    BotaoParar.Enabled = false;
+                    BotaoIniciar.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -103,6 +120,7 @@ namespace Simulador_de_gravidade
                 Console.WriteLine(ex.Message);
             }
         }
+
 
         private void BotaoParar_Click(object sender, EventArgs e)
         {
