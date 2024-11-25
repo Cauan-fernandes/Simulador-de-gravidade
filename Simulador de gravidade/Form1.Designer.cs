@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             PainelControles = new Panel();
+            LoadButton = new Button();
+            SaveButton = new Button();
             BotaoGerar = new Button();
             InputMinRaio = new NumericUpDown();
             InputMaxRaio = new NumericUpDown();
@@ -56,6 +58,8 @@
             // 
             // PainelControles
             // 
+            PainelControles.Controls.Add(LoadButton);
+            PainelControles.Controls.Add(SaveButton);
             PainelControles.Controls.Add(BotaoGerar);
             PainelControles.Controls.Add(InputMinRaio);
             PainelControles.Controls.Add(InputMaxRaio);
@@ -72,8 +76,28 @@
             PainelControles.Dock = DockStyle.Top;
             PainelControles.Location = new Point(0, 0);
             PainelControles.Name = "PainelControles";
-            PainelControles.Size = new Size(870, 69);
+            PainelControles.Size = new Size(949, 69);
             PainelControles.TabIndex = 0;
+            // 
+            // LoadButton
+            // 
+            LoadButton.Location = new Point(859, 36);
+            LoadButton.Name = "LoadButton";
+            LoadButton.Size = new Size(75, 30);
+            LoadButton.TabIndex = 14;
+            LoadButton.Text = "Carregar";
+            LoadButton.UseVisualStyleBackColor = true;
+            LoadButton.Click += Carregar_Click;
+            // 
+            // SaveButton
+            // 
+            SaveButton.Location = new Point(859, 3);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new Size(75, 29);
+            SaveButton.TabIndex = 13;
+            SaveButton.Text = "Salvar";
+            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.Click += Salvar_Click;
             // 
             // BotaoGerar
             // 
@@ -147,7 +171,7 @@
             // 
             InputTempoIteracoes.Location = new Point(412, 36);
             InputTempoIteracoes.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
-            InputTempoIteracoes.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
+            InputTempoIteracoes.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             InputTempoIteracoes.Name = "InputTempoIteracoes";
             InputTempoIteracoes.Size = new Size(64, 23);
             InputTempoIteracoes.TabIndex = 5;
@@ -158,9 +182,9 @@
             LabelTempoIteracoes.AutoSize = true;
             LabelTempoIteracoes.Location = new Point(283, 38);
             LabelTempoIteracoes.Name = "LabelTempoIteracoes";
-            LabelTempoIteracoes.Size = new Size(112, 15);
+            LabelTempoIteracoes.Size = new Size(122, 15);
             LabelTempoIteracoes.TabIndex = 4;
-            LabelTempoIteracoes.Text = "Tempo Iterações (s):";
+            LabelTempoIteracoes.Text = "Quantidade Iterações:";
             // 
             // LabelNumCorpos
             // 
@@ -210,7 +234,7 @@
             Espaco.Dock = DockStyle.Fill;
             Espaco.Location = new Point(0, 69);
             Espaco.Name = "Espaco";
-            Espaco.Size = new Size(870, 381);
+            Espaco.Size = new Size(949, 381);
             Espaco.TabIndex = 1;
             Espaco.Paint += Espaco_Paint;
             // 
@@ -227,7 +251,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(870, 450);
+            ClientSize = new Size(949, 450);
             Controls.Add(Espaco);
             Controls.Add(PainelControles);
             Name = "Form1";
@@ -263,5 +287,7 @@
         private Panel Espaco;
         private Button BotaoGerar;
         private Label LabelNumIteracoes;
+        private Button LoadButton;
+        private Button SaveButton;
     }
 }

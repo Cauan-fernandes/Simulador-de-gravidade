@@ -115,6 +115,19 @@ namespace Simulador_de_gravidade
             this.Nome = nome;
         }
 
+        public Corpo Clonar()
+        {
+            return new Corpo
+            {
+                Nome = this.Nome,
+                Massa = this.Massa,
+                Densidade = this.Densidade,
+                PosicaoX = this.PosicaoX,
+                PosicaoY = this.PosicaoY,
+                VelocidadeX = this.VelocidadeX,
+                VelocidadeY = this.VelocidadeY
+            };
+        }
 
         public static Corpo operator +(Corpo c1, Corpo c2)
         {

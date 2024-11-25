@@ -10,12 +10,13 @@ namespace Simulador_de_gravidade
     internal class Universo : UniversoAbstrato
     {
         private double gravidade = 6.674184 * Math.Pow(10, -11);
-        public int QtdCorpos;
-        public int QtdIteracoes;
-        public double Tempo;
+        private int QtdCorpos;
+        private int QtdIteracoes;
+        private double Tempo;
         private int MinMassa, MaxMassa, MinRaio, MaxRaio;
         private Random Rnd;
-        public List<Corpo> corpos = new List<Corpo>();
+        private List<Corpo> corpos = new List<Corpo>();
+        private List<Corpo> valoresIniciaisCorpos = new List<Corpo>();
 
         public Universo(int qntCorpos, int intervaloTempo, int minMassa, int maxMassa, int minRaio, int maxRaio)
         {
@@ -30,7 +31,15 @@ namespace Simulador_de_gravidade
         }
 
         public List<Corpo> GetCorpos() { return corpos; }
-        public int GetQntIteracoes() { return QtdIteracoes; }
+        public int GetQtdIteracoes() { return QtdIteracoes; }
+        public void SetQtdIteracoes(int qtdIteracoes) { QtdIteracoes = qtdIteracoes; }
+        public List<Corpo> GetValoresIniciaisCorpos() { return valoresIniciaisCorpos; }
+        
+        
+        public void SalvarValoresIniciaisCorpos()
+        {
+            valoresIniciaisCorpos = corpos.Select(corpo => corpo.Clonar()).ToList();
+        }
 
         public override void IteracaoGravitacional(Corpo corpo)
         {
